@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Vibe Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>.gold { color: #d4af37; }</style>
+</head>
+<body class="bg-gray-50">
+
+  <nav class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between">
+      <h1 class="text-3xl font-bold gold">VIBE SETTINGS</h1>
+      <a href="admin.html" class="text-xl">Back</a>
+    </div>
+  </nav>
+
+  <div class="max-w-2xl mx-auto p-8 space-y-12">
+
+    <!-- UPI ID -->
+    <div class="bg-white rounded-3xl shadow p-8">
+      <h2 class="text-2xl mb-6">UPI ID</h2>
+      <input id="upiId" placeholder="yourname@upi" class="w-full p-5 border rounded-2xl text-lg mb-6">
+      <button onclick="saveUPI()" class="w-full bg-green-600 text-white py-5 rounded-3xl">Save UPI ID</button>
+    </div>
+
+    <!-- QR Code Upload -->
+    <div class="bg-white rounded-3xl shadow p-8">
+      <h2 class="text-2xl mb-6">Upload Your UPI QR Code</h2>
+      <input type="file" id="qrInput" accept="image/*" class="w-full p-4 border rounded-2xl mb-6" onchange="previewQR(event)">
+      
+      <div id="qr-preview" class="hidden border rounded-3xl p-6 text-center">
+        <img id="qr-img" class="mx-auto max-w-[250px] rounded-2xl">
+        <p class="text-sm text-gray-500 mt-4">This QR will show in Checkout</p>
+      </div>
+
+      <button onclick="saveQR()" class="mt-6 w-full bg-purple-600 text-white py-5 rounded-3xl">Save QR Code</button>
+    </div>
+
+  </div>
+
+  <script>
+    function saveUPI() {
+      const upi = document.getElementById('upiId').value;
+      if (upi) {
+        localStorage.setItem('globalUPI', upi);
+        alert("UPI ID Saved!");
+      }
+    }
+
+    function previewQR(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          document.getElementById('qr-img').src = ev.target.result;
+          document.getElementById('qr-preview').classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function saveQR() {
+      const qrSrc = document.getElementById('qr-img').src;
+      if (qrSrc) {
+        localStorage.setItem('upiQR', qrSrc);
+        alert("UPI QR Code Saved! It will show in Checkout.");
+      }
+    }
+
+    window.onload = () => {
+      const savedUPI = localStorage.getItem('globalUPI');
+      if (savedUPI) document.getElementById('upiId').value = savedUPI;
+    };
+  </script>
+</body>
+</html>
