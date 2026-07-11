@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders - Vibe Jewelry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>.gold { color: #d4af37; }</style>
+</head>
+<body class="bg-gray-50">
+
+  <nav class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <div class="flex items-center gap-4">
+        <h1 class="text-3xl font-bold gold">VIBE</h1>
+      </div>
+      <a href="index.html" class="text-xl">Home</a>
+    </div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto p-6">
+    <h1 class="text-4xl font-light gold text-center mb-10">My Orders</h1>
+
+    <div id="orders-list" class="space-y-6">
+      <!-- Orders will be loaded here -->
+    </div>
+  </div>
+
+  <script>
+    // Dummy Orders (आप बाद में Backend से fetch करेंगे)
+    const orders = [
+      {
+        id: "#VIBE784392",
+        date: "10 July 2026",
+        items: "Rose Gold Hoops + Pearl Necklace",
+        total: 2398,
+        status: "Delivered"
+      },
+      {
+        id: "#VIBE784391",
+        date: "8 July 2026",
+        items: "Crystal Bracelet",
+        total: 799,
+        status: "On the way"
+      }
+    ];
+
+    function loadOrders() {
+      const container = document.getElementById('orders-list');
+      container.innerHTML = orders.map(order => `
+        <div class="bg-white rounded-3xl shadow p-8">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-sm text-gray-500">${order.date}</p>
+              <p class="text-xl font-medium">${order.id}</p>
+            </div>
+            <span class="px-5 py-2 bg-green-100 text-green-700 rounded-3xl text-sm font-medium">${order.status}</span>
+          </div>
+          <p class="mt-6 text-gray-600">${order.items}</p>
+          <p class="text-2xl gold font-bold mt-4">₹${order.total}</p>
+        </div>
+      `).join('');
+    }
+
+    window.onload = loadOrders;
+  </script>
+</body>
+</html>
