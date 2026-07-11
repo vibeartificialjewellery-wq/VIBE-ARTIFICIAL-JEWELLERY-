@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>.gold { color: #d4af37; }</style>
+</head>
+<body class="bg-gray-50">
+
+  <nav class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <h1 class="text-3xl font-bold gold">VIBE DASHBOARD</h1>
+      <button onclick="logout()" class="text-red-600">Logout</button>
+    </div>
+  </nav>
+
+  <div class="max-w-7xl mx-auto p-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+      <button onclick="showSection('products')" class="bg-white p-8 rounded-3xl shadow text-center hover:shadow-xl">
+        <i class="fas fa-box text-4xl gold mb-4"></i>
+        <p class="font-semibold">Products</p>
+      </button>
+      <button onclick="showSection('orders')" class="bg-white p-8 rounded-3xl shadow text-center hover:shadow-xl">
+        <i class="fas fa-shopping-bag text-4xl gold mb-4"></i>
+        <p class="font-semibold">Orders</p>
+      </button>
+      <button onclick="showSection('settings')" class="bg-white p-8 rounded-3xl shadow text-center hover:shadow-xl">
+        <i class="fas fa-cog text-4xl gold mb-4"></i>
+        <p class="font-semibold">Settings</p>
+      </button>
+      <button onclick="showSection('analytics')" class="bg-white p-8 rounded-3xl shadow text-center hover:shadow-xl">
+        <i class="fas fa-chart-bar text-4xl gold mb-4"></i>
+        <p class="font-semibold">Analytics</p>
+      </button>
+    </div>
+
+    <!-- Products Section -->
+    <div id="products" class="section hidden">
+      <h2 class="text-3xl font-light mb-8">Products Management</h2>
+      <!-- Add Product Form + List (आपके पिछले admin.html जैसा) -->
+    </div>
+
+    <!-- Orders Section -->
+    <div id="orders" class="section hidden">
+      <h2 class="text-3xl font-light mb-8">Orders Management</h2>
+      <!-- Orders List -->
+    </div>
+
+    <!-- Settings Section -->
+    <div id="settings" class="section hidden">
+      <h2 class="text-3xl font-light mb-8">Settings</h2>
+      <!-- UPI ID + QR Upload -->
+    </div>
+
+    <!-- Analytics -->
+    <div id="analytics" class="section hidden">
+      <h2 class="text-3xl font-light mb-8">Analytics</h2>
+      <p>Total Orders: 12</p>
+      <p>Revenue: ₹45,890</p>
+    </div>
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function logout() {
+      window.location.href = "index.html";
+    }
+
+    // Default open Products
+    window.onload = () => showSection('products');
+  </script>
+</body>
+</html>
