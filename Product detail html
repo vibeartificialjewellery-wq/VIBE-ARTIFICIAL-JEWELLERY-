@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Detail - Vibe Jewelry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>.gold { color: #d4af37; }</style>
+</head>
+<body class="bg-gray-50">
+
+  <nav class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between">
+      <h1 class="text-3xl font-bold gold">VIBE</h1>
+      <a href="shop.html" class="text-xl">← Back</a>
+    </div>
+  </nav>
+
+  <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-12">
+    <!-- Photos -->
+    <div>
+      <img id="main-image" src="https://source.unsplash.com/random/800x800/?earrings" class="w-full rounded-3xl shadow mb-6">
+      <div class="grid grid-cols-4 gap-4">
+        <img onclick="changeImage(this)" src="https://source.unsplash.com/random/800x800/?earrings" class="cursor-pointer rounded-2xl border-2 border-amber-500">
+        <img onclick="changeImage(this)" src="https://source.unsplash.com/random/800x800/?jewelry" class="cursor-pointer rounded-2xl">
+        <img onclick="changeImage(this)" src="https://source.unsplash.com/random/800x800/?necklace" class="cursor-pointer rounded-2xl">
+        <img onclick="changeImage(this)" src="https://source.unsplash.com/random/800x800/?bracelet" class="cursor-pointer rounded-2xl">
+      </div>
+    </div>
+
+    <!-- Details -->
+    <div>
+      <h1 class="text-4xl font-light gold">Rose Gold Hoops</h1>
+      <p class="text-5xl font-bold gold mt-4">₹899</p>
+      <p class="text-sm text-gray-500 line-through">₹1,299</p>
+
+      <div class="mt-8">
+        <h3 class="font-medium mb-3">Description</h3>
+        <p class="text-gray-600">Premium quality artificial jewelry. Lightweight, long lasting shine, perfect for daily wear and special occasions.</p>
+      </div>
+
+      <div class="mt-10 flex gap-4">
+        <button onclick="addToCart()" class="flex-1 py-6 bg-gray-800 text-white text-xl rounded-3xl">
+          Add to Cart
+        </button>
+        <button onclick="buyNow()" class="flex-1 py-6 bg-gradient-to-r from-amber-500 to-yellow-600 text-white text-xl rounded-3xl">
+          Buy Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function changeImage(img) {
+      document.getElementById('main-image').src = img.src;
+    }
+
+    function addToCart() {
+      alert("Product added to cart! 💖");
+    }
+
+    function buyNow() {
+      alert("Redirecting to Checkout...");
+      window.location.href = "checkout.html";
+    }
+  </script>
+</body>
+</html>
