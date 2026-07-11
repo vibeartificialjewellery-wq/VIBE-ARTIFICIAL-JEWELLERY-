@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Vibe Artificial Jewelry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    .gold { color: #d4af37; }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <img src="YOUR_LOGO_URL_HERE" alt="Vibe" class="h-14">
+        <h1 class="text-3xl font-bold gold">VIBE</h1>
+      </div>
+      <a href="shop.html" class="text-xl">← Back to Shop</a>
+    </div>
+  </nav>
+
+  <div class="max-w-2xl mx-auto p-6">
+    <h1 class="text-4xl font-light text-center mb-10 gold">Checkout</h1>
+
+    <div class="bg-white rounded-3xl shadow p-8 space-y-10">
+
+      <!-- Delivery Info -->
+      <div>
+        <h2 class="text-2xl font-medium mb-6 flex items-center gap-3">
+          <i class="fas fa-truck"></i> Delivery Details
+        </h2>
+        <input id="name" placeholder="Full Name" class="w-full border border-gray-300 p-4 rounded-2xl mb-4">
+        <input id="phone" type="tel" placeholder="Phone Number" class="w-full border border-gray-300 p-4 rounded-2xl mb-4">
+        <textarea id="address" rows="4" placeholder="Full Address, City, Pincode" class="w-full border border-gray-300 p-4 rounded-2xl"></textarea>
+      </div>
+
+      <!-- Payment -->
+      <div>
+        <h2 class="text-2xl font-medium mb-6">Payment Method</h2>
+        
+        <div onclick="selectCOD()" id="cod" class="border-2 border-green-500 p-6 rounded-3xl mb-4 cursor-pointer">
+          <div class="flex items-center gap-4">
+            <i class="fas fa-money-bill-wave text-4xl text-green-600"></i>
+            <div>
+              <p class="font-semibold text-xl">Cash on Delivery</p>
+              <p class="text-gray-600">₹500 + Delivery Charge</p>
+            </div>
+          </div>
+        </div>
+
+        <div onclick="selectUPI()" id="upi" class="border-2 border-transparent hover:border-purple-500 p-6 rounded-3xl cursor-pointer">
+          <div class="flex items-center gap-4">
+            <i class="fas fa-qrcode text-4xl text-purple-600"></i>
+            <div>
+              <p class="font-semibold text-xl">UPI Payment</p>
+              <p class="text-gray-600">PhonePe, GPay, Paytm</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="bg-gray-100 p-6 rounded-3xl">
+        <h3 class="font-semibold mb-4">Order Summary</h3>
+        <div id="summary" class="space-y-3 text-sm"></div>
+        <hr class="my-4">
+        <div class="flex justify-between text-xl font-bold gold">
+          <span>Total Payable</span>
+          <span id="total">₹0</span>
+        </div>
+      </div>
+
+      <!-- Place Order -->
+      <button onclick="placeOrder()" 
+              class="w-full py-6 bg-gradient-to-r from-amber-500 to-yellow-600 text-white text-2xl font-medium rounded-3xl">
+        Place Order
+      </button>
+    </div>
+  </div>
+
+  <script>
+    let selectedMethod = 'cod';
+
+    function selectCOD() {
+      selectedMethod = 'cod';
+      document.getElementById('cod').classList.add('border-green-500');
+      document.getElementById('upi').classList.remove('border-purple-500');
+    }
+
+    function selectUPI() {
+      selectedMethod = 'upi';
+      document.getElementById('upi').classList.add('border-purple-500');
+      document.getElementById('cod').classList.remove('border-green-500');
+    }
+
+    // Dummy data (आप बाद में cart से ला सकते हो)
+    const cart = [
+      {name: "Rose Gold Hoops", price: 899, qty: 1},
+      {name: "Pearl Necklace", price: 1499, qty: 1}
+    ];
+
+    function loadSummary() {
+      let html = '';
+      let total = 0;
+
+      cart.forEach(item => {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+        html += `<div class="flex justify-between">
+          <span>${item.name} × ${item.qty}</span>
+          <span>₹${subtotal}</span>
+        </div>`;
+      });
+
+      total += 500; // Delivery
+
+      document.getElementById('summary').innerHTML = html;
+      document.getElementById('total').textContent = `₹${total}`;
+    }
+
+    function placeOrder() {
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+
+      if (!name || !phone || !address) {
+        alert("Please fill all details!");
+        return;
+      }
+
+      if (selectedMethod === 'upi') {
+        alert("UPI Payment Selected\n\nScan QR or Pay to your CrossPe UPI ID\nTotal: ₹" + document.getElementById('total').textContent);
+      } else {
+        alert(`🎉 Order Placed Successfully!\n\nPayment Method: Cash on Delivery\nName: ${name}\nWe will contact you soon!`);
+      }
+
+      // Redirect to success page
+      // window.location.href = "success.html";
+    }
+
+    window.onload = loadSummary;
+  </script>
+</body>
+</html>
