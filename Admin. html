@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Vibe Jewelry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>.gold { color: #d4af37; }</style>
+</head>
+<body class="bg-gray-50">
+
+  <nav class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <h1 class="text-3xl font-bold gold">VIBE ADMIN</h1>
+      <button onclick="logout()" class="text-red-600">Logout</button>
+    </div>
+  </nav>
+
+  <div class="max-w-7xl mx-auto p-6">
+    <h2 class="text-3xl font-light mb-8">Manage Products</h2>
+
+    <!-- Add Product -->
+    <div class="bg-white p-8 rounded-3xl shadow mb-10">
+      <h3 class="text-xl mb-6">Add New Product</h3>
+      
+      <input id="pname" placeholder="Product Name" class="w-full p-4 border rounded-2xl mb-4">
+
+      <!-- Prices -->
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <div>
+          <label class="block text-sm mb-1">Original Price (₹)</label>
+          <input id="poriginal" type="number" placeholder="Real Price" class="w-full p-4 border rounded-2xl">
+        </div>
+        <div>
+          <label class="block text-sm mb-1">Selling Price (₹)</label>
+          <input id="pselling" type="number" placeholder="After Discount" class="w-full p-4 border rounded-2xl">
+        </div>
+      </div>
+
+      <!-- Photo Upload -->
+      <label class="block mb-2 font-medium">Upload Product Photo</label>
+      <input type="file" id="photoInput" accept="image/*" class="w-full p-4 border rounded-2xl mb-4" onchange="previewUploadedImage(event)">
+      
+      <div id="image-preview" class="hidden mt-4 border rounded-2xl overflow-hidden">
+        <img id="preview-img" class="w-full h-64 object-cover">
+      </div>
+
+      <button onclick="addProduct()" class="mt-8 w-full bg-green-600 text-white py-4 rounded-3xl">Add Product</button>
+    </div>
+
+    <!-- Product List -->
+    <div class="bg-white rounded-3xl shadow p-6">
+      <h3 class="text-xl mb-6">All Products</h3>
+      <div id="product-list" class="space-y-4"></div>
+    </div>
+  </div>
+
+  <script>
+    let products = [];
+
+    function previewUploadedImage(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          document.getElementById('preview-img').src = ev.target.result;
+          document.getElementById('image-preview').classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function addProduct() {
+      const name = document.getElementById('pname').value;
+      const original = document.getElementById('poriginal').value;
+      const selling = document.getElementById('pselling').value;
+      const previewImg = document.getElementById('preview-img').src;
+
+      if (name && original && selling) {
+        products.push({
+          id: Date.now(),
+          name,
+          originalPrice: Number(original),
+          price: Number(selling),   // Selling price after discount
+          img: previewImg || "https://source.unsplash.com/random/600x600/?jewelry"
+        });
+        renderProducts();
+        alert("Product Added Successfully!");
+        // Clear form
+        document.getElementById('pname').value = '';
+        document.getElementById('poriginal').value = '';
+        document.getElementById('pselling').value = '';
+        document.getElementById('photoInput').value = '';
+        document.getElementById('image-preview').classList.add('hidden');
+      } else {
+        alert("All fields are required!");
+      }
+    }
+
+    function renderProducts() {
+      const list = document.getElementById('product-list');
+      list.innerHTML = products.map((p, i) => `
+        <div class="flex gap-6 bg-gray-50 p-5 rounded-2xl items-center">
+          <img src="${p.img}" class="w-20 h-20 object-cover rounded-xl">
+          <div class="flex-1">
+            <p class="font-medium">${p.name}</p>
+            <p class="text-sm text-gray-500 line-through">₹${p.originalPrice}</p>
+            <p class="gold text-2xl">₹${p.price}</p>
+          </div>
+          <button onclick="deleteProduct(${i})" class="text-red-500">Delete</button>
+        </div>
+      `).join('');
+    }
+
+    function deleteProduct(i) {
+      if (confirm("Delete this product?")) {
+        products.splice(i, 1);
+        renderProducts();
+      }
+    }
+
+    function logout() {
+      if (confirm("Logout?")) window.location.href = "index.html";
+    }
+
+    window.onload = renderProducts;
+  </script>
+</body>
+</html>
