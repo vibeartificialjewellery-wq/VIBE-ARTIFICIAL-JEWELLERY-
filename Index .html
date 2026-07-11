@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe Artificial Jewelry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    .hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://source.unsplash.com/random/1920x1080/?gold-jewelry') center/cover no-repeat; }
+    .gold { color: #d4af37; }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <img src="YOUR_LOGO_URL_HERE" alt="Vibe" class="h-14">
+        <h1 class="text-3xl font-bold gold">VIBE</h1>
+      </div>
+      <div class="flex gap-8 text-lg">
+        <a href="shop.html" class="hover:text-amber-600">Shop</a>
+        <a href="cart.html" class="hover:text-amber-600">Cart</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero h-screen flex items-center justify-center text-white text-center">
+    <div>
+      <h1 class="text-6xl md:text-7xl font-bold tracking-widest gold">VIBE</h1>
+      <p class="text-3xl mt-4">Golden Beauty, Affordable Luxury</p>
+      <button onclick="window.location.href='shop.html'" class="mt-12 px-12 py-5 bg-amber-400 text-black rounded-full text-xl font-medium">Shop Now</button>
+    </div>
+  </section>
+
+  <!-- 4 Featured Products -->
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-light text-center mb-12 gold">Featured Products</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="bg-white rounded-3xl overflow-hidden shadow hover:shadow-xl transition">
+        <img src="https://source.unsplash.com/random/600x600/?earrings" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h4 class="font-medium">Rose Gold Hoops</h4>
+          <p class="gold">₹899</p>
+          <button onclick="addToCart(1)" class="mt-4 w-full py-3 bg-black text-white rounded-2xl">Add to Cart</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl overflow-hidden shadow hover:shadow-xl transition">
+        <img src="https://source.unsplash.com/random/600x600/?necklace" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h4 class="font-medium">Pearl Necklace</h4>
+          <p class="gold">₹1499</p>
+          <button onclick="addToCart(2)" class="mt-4 w-full py-3 bg-black text-white rounded-2xl">Add to Cart</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl overflow-hidden shadow hover:shadow-xl transition">
+        <img src="https://source.unsplash.com/random/600x600/?bracelet" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h4 class="font-medium">Crystal Bracelet</h4>
+          <p class="gold">₹799</p>
+          <button onclick="addToCart(3)" class="mt-4 w-full py-3 bg-black text-white rounded-2xl">Add to Cart</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl overflow-hidden shadow hover:shadow-xl transition">
+        <img src="https://source.unsplash.com/random/600x600/?bridal-jewelry" class="w-full h-64 object-cover">
+        <div class="p-6">
+          <h4 class="font-medium">Kundan Set</h4>
+          <p class="gold">₹2799</p>
+          <button onclick="addToCart(4)" class="mt-4 w-full py-3 bg-black text-white rounded-2xl">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function addToCart(id) {
+      alert("Product added to cart! 💖");
+    }
+  </script>
+</body>
+</html>
